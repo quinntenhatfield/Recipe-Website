@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaghetti Carbonara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .ingredients, .instructions {
+            margin: 10px 0;
+        }
+        .ingredients ul, .instructions ol {
+            padding-left: 20px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spaghetti Carbonara</h1>
+        <div class="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+                <li>200g spaghetti</li>
+                <li>100g pancetta</li>
+                <li>2 large eggs</li>
+                <li>50g parmesan cheese</li>
+                <li>Black pepper</li>
+                <li>Salt</li>
+            </ul>
+        </div>
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <ol>
+                <li>Cook spaghetti according to package instructions.</li>
+                <li>Fry pancetta in a pan until crispy.</li>
+                <li>Beat eggs and mix with grated parmesan.</li>
+                <li>Drain spaghetti and mix with pancetta.</li>
+                <li>Remove from heat, then stir in egg mixture.</li>
+                <li>Season with black pepper and serve.</li>
+            </ol>
+        </div>
+        <div class="back-link">
+            <a href="../index.html">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
