@@ -65,11 +65,34 @@
         <div class="search-bar">
             <input type="text" id="search" placeholder="Search for a recipe...">
         </div>
-        <ul class="recipe-list">
+        
+        <ul class="recipe-list" id="recipe-list">
             <li><a href="spaghetti-carbonara.html">Spaghetti Carbonara</a></li>
             <li><a href="chicken-alfredo.html">Chicken Alfredo</a></li>
             <li><a href="vegetable-stir-fry.html">Vegetable Stir Fry</a></li>
         </ul>
     </div>
+    <script>
+        document.getElementById("search").addEventListener("keyup", function () {
+            let searchQuery = this.value.toLowerCase();
+            let recipes = document.querySelectorAll("#recipe-list li a");
+    
+            recipes.forEach(recipe => {
+                let recipeText = recipe.textContent;
+                let lowerRecipeText = recipeText.toLowerCase();
+    
+                if (lowerRecipeText.includes(searchQuery)) {
+                    recipe.parentElement.style.display = "block";
+                    // Highlight the matching part
+                    let highlightedText = recipeText.replace(new RegExp(searchQuery, "gi"), match => `<span style="background-color: yellow;">${match}</span>`);
+                    recipe.innerHTML = highlightedText;
+                } else {
+                    recipe.parentElement.style.display = "none";
+                }
+            });
+        });
+    </script>
+    
+    
 </body>
 </html>
