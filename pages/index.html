@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Recipe Website</title>
     <style>
         body {
@@ -26,12 +27,18 @@
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .search-bar input {
-            width: 70%;
+        .search-bar input, .search-bar select {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 1em;
+        }
+        .search-bar input {
+            flex: 1;
+            min-width: 200px;
         }
         .recipe-list {
             list-style: none;
@@ -46,6 +53,12 @@
             color: #007BFF;
             font-size: 1.2em;
         }
+        .time-tag {
+            display: block;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -54,45 +67,95 @@
     </style>
 </head>
 <body>
+
     <div id="navbar"></div>
     <script>
         fetch("nav.html")
             .then(response => response.text())
             .then(data => document.getElementById("navbar").innerHTML = data);
     </script>
+
     <div class="container">
         <h1>Recipe Website</h1>
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Search for a recipe...">
-        </div>
         
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search for a recipe or time...">
+            <select id="time-filter">
+                <option value="all">All Times</option>
+                <option value="under-30">Under 30 mins</option>
+                <option value="30-45">30–45 mins</option>
+                <option value="over-45">Over 45 mins</option>
+            </select>
+        </div>
+
         <ul class="recipe-list" id="recipe-list">
-            <li><a href="spaghetti-carbonara.html">Spaghetti Carbonara</a></li>
-            <li><a href="chicken-alfredo.html">Chicken Alfredo</a></li>
-            <li><a href="vegetable-stir-fry.html">Vegetable Stir Fry</a></li>
+            <li data-time="30 mins">
+                <a href="spaghetti-carbonara.html">Spaghetti Carbonara</a>
+                <span class="time-tag">30 mins</span>
+            </li>
+            <li data-time="45 mins">
+                <a href="chicken-alfredo.html">Chicken Alfredo</a>
+                <span class="time-tag">45 mins</span>
+            </li>
+            <li data-time="20 mins">
+                <a href="vegetable-stir-fry.html">Vegetable Stir Fry</a>
+                <span class="time-tag">10 mins</span>
+            </li>
         </ul>
     </div>
+
     <script>
-        document.getElementById("search").addEventListener("keyup", function () {
-            let searchQuery = this.value.toLowerCase();
-            let recipes = document.querySelectorAll("#recipe-list li a");
-    
-            recipes.forEach(recipe => {
-                let recipeText = recipe.textContent;
-                let lowerRecipeText = recipeText.toLowerCase();
-    
-                if (lowerRecipeText.includes(searchQuery)) {
-                    recipe.parentElement.style.display = "block";
-                    // Highlight the matching part
-                    let highlightedText = recipeText.replace(new RegExp(searchQuery, "gi"), match => `<span style="background-color: yellow;">${match}</span>`);
-                    recipe.innerHTML = highlightedText;
+        function parseMinutes(timeStr) {
+            const match = timeStr.match(/(\d+)/);
+            return match ? parseInt(match[1]) : 0;
+        }
+
+        function filterRecipes() {
+            const query = document.getElementById("search").value.toLowerCase();
+            const timeFilter = document.getElementById("time-filter").value;
+            const items = document.querySelectorAll("#recipe-list li");
+
+            items.forEach(item => {
+                const link = item.querySelector("a");
+                const text = link.textContent.toLowerCase();
+                const timeText = item.dataset.time.toLowerCase();
+                const timeValue = parseMinutes(timeText);
+
+                let timeMatch = false;
+
+                if (timeFilter === "all") {
+                    timeMatch = true;
+                } else if (timeFilter === "under-30") {
+                    timeMatch = timeValue < 30;
+                } else if (timeFilter === "30-45") {
+                    timeMatch = timeValue >= 30 && timeValue <= 45;
+                } else if (timeFilter === "over-45") {
+                    timeMatch = timeValue > 45;
+                }
+
+                // Reset highlighting
+                link.innerHTML = link.textContent;
+
+                const textMatch = text.includes(query) || timeText.includes(query);
+
+                if (timeMatch && textMatch) {
+                    item.style.display = "block";
+
+                    // Highlight match in recipe name
+                    if (query && text.includes(query)) {
+                        link.innerHTML = link.textContent.replace(
+                            new RegExp(query, "gi"),
+                            match => `<span style="background-color: yellow;">${match}</span>`
+                        );
+                    }
                 } else {
-                    recipe.parentElement.style.display = "none";
+                    item.style.display = "none";
                 }
             });
-        });
+        }
+
+        document.getElementById("search").addEventListener("keyup", filterRecipes);
+        document.getElementById("time-filter").addEventListener("change", filterRecipes);
     </script>
-    
-    
 </body>
 </html>
