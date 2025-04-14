@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Shrimp Tacos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .time-badge {
+            text-align: center;
+            font-size: 1em;
+            color: #666;
+            background-color: #e9ecef;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin: 10px auto 20px;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+            color: #007BFF;
+            margin-top: 30px;
+        }
+        ul, ol {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar"></div>
+    <script>
+        fetch("nav.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
+    <div class="container">
+        <h1>Shrimp Tacos</h1>
+        <div class="time-badge">⏱️ Cook Time: 25 mins</div>
+        <img src="../images/shrimp-tacos.jpg" alt="Shrimp Tacos">
+
+        <div class="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+                <li>1 lb shrimp, peeled and deveined</li>
+                <li>1 tbsp olive oil</li>
+                <li>1 tsp chili powder</li>
+                <li>1/2 tsp cumin</li>
+                <li>1/2 tsp paprika</li>
+                <li>1/4 tsp garlic powder</li>
+                <li>Salt and pepper to taste</li>
+                <li>8 small corn tortillas</li>
+                <li>1 cup shredded cabbage</li>
+                <li>1/4 cup chopped cilantro</li>
+                <li>1/4 cup sour cream</li>
+                <li>1 tbsp lime juice</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <ol>
+                <li>In a bowl, toss shrimp with olive oil, chili powder, cumin, paprika, garlic powder, salt, and pepper.</li>
+                <li>Heat a skillet over medium-high heat and cook shrimp for 2–3 minutes per side until pink and cooked through.</li>
+                <li>Warm tortillas in a separate pan or microwave.</li>
+                <li>Mix sour cream and lime juice to create a simple crema.</li>
+                <li>Assemble tacos with cabbage, shrimp, cilantro, and a drizzle of crema. Serve immediately.</li>
+            </ol>
+        </div>
+
+        <div class="history" style="margin-top: 30px;">
+            <h2 style="text-align: center;">History</h2>
+            <p style="padding: 0 20px; line-height: 1.6;">
+                Shrimp tacos have their roots in the coastal regions of Mexico, where fresh seafood is a culinary cornerstone. Combining grilled or sautéed shrimp with vibrant toppings in a soft tortilla has made this dish a favorite far beyond its origins.
+            </p>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
