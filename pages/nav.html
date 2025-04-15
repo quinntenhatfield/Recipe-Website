@@ -4,35 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Remove any default margin/padding */
         body, nav {
             margin: 0;
             padding: 0;
         }
 
         nav {
-            background-color: #333; /* Navbar background */
+            background-color: #333;
         }
 
         nav ul {
-            list-style-type: none;  /* Remove bullet points */
+            list-style: none;
             margin: 0;
             padding: 0;
-            display: flex;  /* Display links side by side */
+            display: flex;
         }
 
         nav ul li {
-            padding: 10px 20px;
+            position: relative;
         }
 
         nav ul li a {
+            display: block;
+            padding: 14px 20px;
+            color: white;
             text-decoration: none;
-            color: white; /* Link color */
             font-size: 18px;
         }
 
-        nav ul li a:hover {
-            color: yellow; /* Hover effect */
+        nav ul li:hover > a {
+            color: yellow;
+        }
+
+        /* Dropdown styles */
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 200px;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        nav ul li ul li {
+            display: block;
+        }
+
+        nav ul li ul li a {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        nav ul li ul li a:hover {
+            background-color: #555;
+            color: yellow;
         }
     </style>
 </head>
@@ -40,15 +70,34 @@
 
     <nav>
         <ul>
-            <li><a href="index.html" target="_top">Home Page</a></li>
-            <li><a href="spaghetti-carbonara.html" target="_top">Spaghetti Carbonara</a></li>
-            <li><a href="vegetable-stir-fry.html" target="_top">Vegetable Stir Fry</a></li>
-            <li><a href="chicken-alfredo.html" target="_top">Chicken Alfredo</a></li>
-            <li><a href="avocado-toast.html" target="_top">Avocado Toast</a></li>
-            <li><a href="classic-pancakes.html" target="_top">Classic Pancakes</a></li>
-            <li><a href="shrimp-tacos.html" target="_top">Shrimp Tacos</a></li>
-            <li><a href="chicken-tikka-masala.html" target="_top">Chicken Tikka Masala</a></li>
+            <li><a href="index.html" target="_top">Home</a></li>
+
+            <li>
+                <a href="#">Breakfast</a>
+                <ul>
+                    <li><a href="avocado-toast.html" target="_top">Avocado Toast</a></li>
+                    <li><a href="classic-pancakes.html" target="_top">Classic Pancakes</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Lunch</a>
+                <ul>
+                    <li><a href="vegetable-stir-fry.html" target="_top">Vegetable Stir Fry</a></li>
+                    <li><a href="shrimp-tacos.html" target="_top">Shrimp Tacos</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Dinner</a>
+                <ul>
+                    <li><a href="spaghetti-carbonara.html" target="_top">Spaghetti Carbonara</a></li>
+                    <li><a href="chicken-alfredo.html" target="_top">Chicken Alfredo</a></li>
+                    <li><a href="chicken-tikka-masala.html" target="_top">Chicken Tikka Masala</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
+
 </body>
 </html>

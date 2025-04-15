@@ -53,7 +53,7 @@
             color: #007BFF;
             font-size: 1.2em;
         }
-        .time-tag {
+        .time-tag, .meat-type-tag, .meal-tag {
             display: block;
             font-size: 0.9em;
             color: #666;
@@ -79,7 +79,7 @@
         <h1>Recipe Website</h1>
         
         <div class="search-bar">
-            <input type="text" id="search" placeholder="Search for a recipe or time...">
+            <input type="text" id="search" placeholder="Search for a recipe, time, meat, or meal...">
             <select id="time-filter">
                 <option value="all">All Times</option>
                 <option value="under-30">Under 30 mins</option>
@@ -89,33 +89,47 @@
         </div>
 
         <ul class="recipe-list" id="recipe-list">
-            <li data-time="30 mins">
+            <li data-time="30 mins" data-meat="pork" data-meal="dinner">
                 <a href="spaghetti-carbonara.html">Spaghetti Carbonara</a>
                 <span class="time-tag">30 mins</span>
+                <span class="meat-type-tag">Pork</span>
+                <span class="meal-tag">Dinner</span>
             </li>
-            <li data-time="45 mins">
+            <li data-time="45 mins" data-meat="chicken" data-meal="dinner">
                 <a href="chicken-alfredo.html">Chicken Alfredo</a>
                 <span class="time-tag">45 mins</span>
+                <span class="meat-type-tag">Chicken</span>
+                <span class="meal-tag">Dinner</span>
             </li>
-            <li data-time="10 mins">
+            <li data-time="10 mins" data-meat="none" data-meal="lunch">
                 <a href="vegetable-stir-fry.html">Vegetable Stir Fry</a>
                 <span class="time-tag">10 mins</span>
+                <span class="meat-type-tag">Vegetarian</span>
+                <span class="meal-tag">Lunch</span>
             </li>
-            <li data-time="10 mins">
+            <li data-time="10 mins" data-meat="none" data-meal="breakfast">
                 <a href="avocado-toast.html">Avocado Toast</a>
                 <span class="time-tag">10 mins</span>
+                <span class="meat-type-tag">Vegetarian</span>
+                <span class="meal-tag">Breakfast</span>
             </li>
-            <li data-time="40 mins">
+            <li data-time="40 mins" data-meat="chicken" data-meal="dinner">
                 <a href="chicken-tikka-masala.html">Chicken Tikka Masala</a>
                 <span class="time-tag">40 mins</span>
+                <span class="meat-type-tag">Chicken</span>
+                <span class="meal-tag">Dinner</span>
             </li>
-            <li data-time="20 mins">
+            <li data-time="20 mins" data-meat="none" data-meal="breakfast">
                 <a href="classic-pancakes.html">Classic Pancakes</a>
                 <span class="time-tag">20 mins</span>
+                <span class="meat-type-tag">Vegetarian</span>
+                <span class="meal-tag">Breakfast</span>
             </li>
-            <li data-time="25 mins">
+            <li data-time="25 mins" data-meat="shrimp" data-meal="lunch">
                 <a href="shrimp-tacos.html">Shrimp Tacos</a>
                 <span class="time-tag">25 mins</span>
+                <span class="meat-type-tag">Shrimp</span>
+                <span class="meal-tag">Lunch</span>
             </li>
         </ul>
     </div>
@@ -135,10 +149,11 @@
                 const link = item.querySelector("a");
                 const text = link.textContent.toLowerCase();
                 const timeText = item.dataset.time.toLowerCase();
+                const meat = item.dataset.meat.toLowerCase();
+                const meal = item.dataset.meal.toLowerCase();
                 const timeValue = parseMinutes(timeText);
 
                 let timeMatch = false;
-
                 if (timeFilter === "all") {
                     timeMatch = true;
                 } else if (timeFilter === "under-30") {
@@ -152,7 +167,11 @@
                 // Reset highlighting
                 link.innerHTML = link.textContent;
 
-                const textMatch = text.includes(query) || timeText.includes(query);
+                const textMatch =
+                    text.includes(query) ||
+                    timeText.includes(query) ||
+                    meat.includes(query) ||
+                    meal.includes(query);
 
                 if (timeMatch && textMatch) {
                     item.style.display = "block";
